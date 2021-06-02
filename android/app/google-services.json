@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "777778226484",
+    "project_id": "workvn-130b0",
+    "storage_bucket": "workvn-130b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777778226484:android:85fd86989d0e32241b7161",
+        "android_client_info": {
+          "package_name": "com.example.workvn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777778226484-lde6cqv8qaq67ih0btg3q26c4oja9giv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ0ngTTK7N30R3SFhCgyoiqlAzXTL8gI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777778226484-lde6cqv8qaq67ih0btg3q26c4oja9giv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
