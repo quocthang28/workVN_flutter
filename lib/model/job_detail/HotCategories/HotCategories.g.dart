@@ -37,7 +37,7 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
 
 DetailBean _$DetailBeanFromJson(Map<String, dynamic> json) {
   return DetailBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     jobCategory_Id: json['jobCategory_Id'] == null
         ? null
         : JobCategory_IdBean.fromJson(

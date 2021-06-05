@@ -28,6 +28,37 @@ class _RecruitmentPostService implements RecruitmentPostService {
     return value;
   }
 
+  @override
+  Future<PostDetail> getPostDetail(postID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'post_id': postID};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PostDetail>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/recruitment-post/detail',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PostDetail.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TopViewPosts> getTopViewPosts(map) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(map);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TopViewPosts>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/recruitment-post/relevant-jobs',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TopViewPosts.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

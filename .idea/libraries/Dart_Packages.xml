@@ -121,6 +121,13 @@
             </list>
           </value>
         </entry>
+        <entry key="carousel_slider">
+          <value>
+            <list>
+              <option value="C:/flutter/.pub-cache/hosted/pub.dartlang.org/carousel_slider-4.0.0-nullsafety.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="characters">
           <value>
             <list>
@@ -639,6 +646,13 @@
             </list>
           </value>
         </entry>
+        <entry key="shimmer">
+          <value>
+            <list>
+              <option value="C:/flutter/.pub-cache/hosted/pub.dartlang.org/shimmer-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -841,6 +855,7 @@
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/built_collection-5.0.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/built_value-8.0.6/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cached_network_image-3.0.0/lib" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/carousel_slider-4.0.0-nullsafety.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.2.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/checked_yaml-2.0.1/lib" />
@@ -912,6 +927,7 @@
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shelf-1.1.4/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_web_socket-1.0.1/lib" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shimmer-2.0.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/source_gen-1.0.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3/lib" />

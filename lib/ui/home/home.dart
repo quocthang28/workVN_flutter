@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:workvn/controller/auth_controller.dart';
 import 'package:workvn/controller/company_controller/company_controller.dart';
@@ -11,7 +13,9 @@ import 'package:workvn/controller/recruitment_post_controller/recruitment_post_c
 import 'package:workvn/model/company/featured_company/FeaturedCompany.dart';
 import 'package:workvn/model/job_detail/HotCategories/HotCategories.dart';
 import 'package:workvn/model/recruitment_post/recommended_post/RecommendedPost.dart';
+import 'package:workvn/navigation.dart';
 import 'package:workvn/res/app_color.dart';
+import 'package:workvn/ui/common_widgets/post_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -60,33 +64,37 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     getData();
-    print(_featuredCompany.data);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     Widget _buildHotCategories() {
       List<Widget> categoryCards = [];
       _hotCategories.data!.forEach((element) {
-        categoryCards.add(Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              '${element.detail!.jobCategory_Id!.jobCategoryName!} (${element.countTotal!})'
-                  .text
-                  .color(AppColor.lightBlue)
-                  .size(18.0)
-                  .make(),
-              Icon(
-                Icons.chevron_right,
-                color: AppColor.lightBlue,
-                size: 35,
-              ),
-            ],
-          ),
-        ).p(8));
+        categoryCards.add(GestureDetector(
+          onTap: () => Get.toNamed(SiteNavigation.TOPVIEWPOSTS,
+              arguments: element.detail!.id),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                '${element.detail!.jobCategory_Id!.jobCategoryName!} (${element.countTotal!})'
+                    .text
+                    .color(AppColor.lightBlue)
+                    .size(18.0)
+                    .make(),
+                Icon(
+                  Icons.chevron_right,
+                  color: AppColor.lightBlue,
+                  size: 35,
+                ),
+              ],
+            ),
+          ).p(8),
+        ));
       });
 
       return Column(
@@ -99,55 +107,11 @@ class _HomeScreenState extends State<HomeScreen>
         shrinkWrap: true,
         itemCount: _recommendedPost.data!.length,
         physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) => Row(
-          children: [
-            // CachedNetworkImage(
-            //   imageUrl: element.company_Id!.optionalDetailCompany_Id!.logoUrl!,
-            //   progressIndicatorBuilder: (context, url, downloadProgress) =>
-            //       CircularProgressIndicator(value: downloadProgress.progress),
-            //   errorWidget: (context, url, error) => Text('No image'),
-            // ).expand(flex: 1),
-            Image.network(_recommendedPost.data![index].company_Id!
-                    .optionalDetailCompany_Id!.logoUrl!)
-                .expand(flex: 1),
-            ListTile(
-              visualDensity: VisualDensity.comfortable,
-              title: _recommendedPost.data![index].jobTitle!.text.ellipsis
-                  .size(18)
-                  .make(),
-              subtitle: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  //element.id!.text.make(),
-                  //TODO: ADD COMPANY PIC
-                  _recommendedPost
-                      .data![index].company_Id!.companyName!.text.ellipsis
-                      .size(16)
-                      .make()
-                      .pOnly(bottom: 4),
-                  _recommendedPost.data![index].salaryRange_Id!.salaryMin ==
-                              0 &&
-                          _recommendedPost
-                                  .data![index].salaryRange_Id!.salaryMax ==
-                              0
-                      ? 'Thương lượng'
-                          .text
-                          .size(16)
-                          .color(AppColor.lightBlue)
-                          .make()
-                      : '${_recommendedPost.data![index].salaryRange_Id!.salaryMin}\$ - ${_recommendedPost.data![index].salaryRange_Id!.salaryMax}\$'
-                          .text
-                          .color(AppColor.lightBlue)
-                          .make(),
-                ],
-              ).pOnly(top: 4),
-            ).expand(flex: 3),
-          ],
-        ).p(8),
+        itemBuilder: (context, index) =>
+            PostTile.buildInstance(_recommendedPost.data![index]),
         separatorBuilder: (context, index) => Divider(
           thickness: 1.0,
-          color: Colors.grey,
+          color: Colors.grey[300],
         ).pSymmetric(h: 16),
       );
     }
@@ -165,11 +129,29 @@ class _HomeScreenState extends State<HomeScreen>
         ));
       });
 
-      return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: companies,
+      return CarouselSlider(
+        options: CarouselOptions(
+          height: 180,
+          autoPlay: true,
         ),
+        items: _featuredCompany.data!.map((e) {
+          return Builder(
+            builder: (BuildContext context) {
+              return CachedNetworkImage(
+                height: 180,
+                imageUrl:
+                    'https://images02.vietnamworks.com${e.optionalDetailCompany_Id!.logoUrl!}',
+                placeholder: (context, url) => Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: CircularProgressIndicator().centered()),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+                fit: BoxFit.fitWidth,
+              );
+            },
+          );
+        }).toList(),
       );
     }
 
@@ -195,36 +177,110 @@ class _HomeScreenState extends State<HomeScreen>
                   .text
                   .size(20.0)
                   .bold
-                  .color(AppColor.lightBlue)
+                  .color(Colors.grey[700]!)
                   .make(),
             ).p(8.0),
             !_isLoadingFeaturedCompany
                 ? _buildFeaturedCompanies()
-                : CircularProgressIndicator().centered(),
+                : SizedBox(height: 180),
             Align(
               alignment: Alignment.centerLeft,
               child: 'Danh mục hot'
                   .text
                   .size(20.0)
                   .bold
-                  .color(AppColor.lightBlue)
+                  .color(Colors.grey[700]!)
                   .make(),
             ).p(8.0),
             !_isLoadingCategories
                 ? _buildHotCategories()
-                : CircularProgressIndicator().centered(),
+                : SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.white,
+                      child: ListView.builder(
+                        itemBuilder: (_, __) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 30.0,
+                            color: Colors.white,
+                          ),
+                        ).pSymmetric(h: 8, v: 10),
+                        itemCount: 3,
+                      ),
+                    ),
+                  ),
             Align(
               alignment: Alignment.centerLeft,
               child: 'Gợi ý việc làm cho bạn'
                   .text
                   .size(20.0)
                   .bold
-                  .color(AppColor.lightBlue)
+                  .color(Colors.grey[700]!)
                   .make(),
             ).p(8.0),
             !_isLoadingRecommended
                 ? _buildRecommendedJobs()
-                : CircularProgressIndicator().centered(),
+                : SizedBox(
+                    width: double.infinity,
+                    height: 100.0,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.white,
+                      child: ListView.builder(
+                        itemBuilder: (_, __) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                width: 48.0,
+                                height: 48.0,
+                                color: Colors.white,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      width: double.infinity,
+                                      height: 8.0,
+                                      color: Colors.white,
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 8.0,
+                                      color: Colors.white,
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                    ),
+                                    Container(
+                                      width: 40.0,
+                                      height: 8.0,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        itemCount: 6,
+                      ),
+                    ),
+                  ).pSymmetric(h: 8),
           ],
         ),
       ),
@@ -232,4 +288,4 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
-//company pic https://images02.vietnamworks.com/
+//company pic https://images02.vietnamworks.com

@@ -32,7 +32,7 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     requiredSkills: (json['requiredSkills'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     jobTitle: json['jobTitle'] as String?,
     aliasPost: json['aliasPost'] as String?,
     jobLevel_Id: json['jobLevel_Id'] as String?,

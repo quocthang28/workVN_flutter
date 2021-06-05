@@ -7,7 +7,8 @@ class AppColor {
   static const Color scaffoldBackgroundColor = Colors.white;
   static const Color lightBlue = Colors.lightBlue;
   static const Color lightBrown = Color(0xFF82643E);
-  static const Color authGreen = Color(0xffddf9df);
+  static const Color authGreen = Color(0xffd2eff7);
   static const Color green = Color(0xFF69c271);
+  static const Color dividerColor = Color(0xffeceaea);
   //todo: add button color
 }

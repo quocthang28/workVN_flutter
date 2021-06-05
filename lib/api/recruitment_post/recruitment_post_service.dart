@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-import 'package:workvn/model/job_detail/HotCategories/HotCategories.dart';
+import 'package:workvn/model/post_detail/PostDetail.dart';
 import 'package:workvn/model/recruitment_post/recommended_post/RecommendedPost.dart';
+import 'package:workvn/model/recruitment_post/top_view_post/TopViewPosts.dart';
 
 part 'recruitment_post_service.g.dart';
 
@@ -11,4 +12,12 @@ abstract class RecruitmentPostService {
 
   @GET("/recruitment-post/recommended-post")
   Future<RecommendedPost> getRecommendedPost();
+
+  @GET("/recruitment-post/detail")
+  Future<PostDetail> getPostDetail(@Query("post_id") String postID);
+
+  //@POST("/recruitment-post/similar-jobs")
+
+  @POST("/recruitment-post/relevant-jobs")
+  Future<TopViewPosts> getTopViewPosts(@Body() Map<String, dynamic> map);
 }
