@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workvn/model/User/User.dart';
 import 'package:workvn/navigation.dart';
@@ -7,12 +8,13 @@ import 'package:workvn/ui/widgets/loading_indicator.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Rxn<User> _firebaseUser = Rxn<User>();
-  //Rxn<UserModel> _firestoreUser = Rxn<UserModel>();
+  Rxn<UserModel> _firestoreUser = Rxn<UserModel>();
 
   Rxn<User> get firebaseUser => _firebaseUser;
 
-  //Rxn<UserModel> get firestoreUser => _firestoreUser;
+  Rxn<UserModel> get firestoreUser => _firestoreUser;
 
   Stream<User?> get userState =>
       _auth.authStateChanges(); // check sign in sign out
@@ -34,14 +36,15 @@ class AuthController extends GetxController {
   //   return doc.exists;
   // }
 
-  // Stream<UserModel> streamFirestoreUser() {
-  //   // return user data from firestore
-  //   return _db
-  //       .collection('users')
-  //       .doc('${_firebaseUser.value!.uid}')
-  //       .snapshots()
-  //       .map((snapshot) => UserModel.fromMap(snapshot.data()!));
-  // }
+  Stream<UserModel> streamFirestoreUser() {
+    // return user data from firestore
+    print('bind stream');
+    return _firestore
+        .collection('users')
+        .doc('${_firebaseUser.value!.uid}')
+        .snapshots()
+        .map((snapshot) => UserModel.fromMap(snapshot.data()!));
+  }
 
   // Future<void> isAdmin() async {
   //   await currentUser.then((user) async {
@@ -57,12 +60,12 @@ class AuthController extends GetxController {
   // }
 
   void handleAuthChanged(User? _firebaseUser) async {
-    // if (_firebaseUser?.uid != null) {
-    //   // logged in
-    //   _firestoreUser.bindStream(
-    //       streamFirestoreUser()); // bind user from firestore to local
-    //   await isAdmin();
-    // }
+    if (_firebaseUser?.uid != null) {
+      // logged in
+      _firestoreUser.bindStream(
+          streamFirestoreUser()); // bind user from firestore to local
+      //await isAdmin();
+    }
 
     if (_firebaseUser == null) {
       Get.offAllNamed(SiteNavigation.LOGIN);
@@ -72,10 +75,10 @@ class AuthController extends GetxController {
     }
   }
 
-  // void _createUserFirestore(UserModel user, User _firebaseUser) {
-  //   _db.doc('/users/${_firebaseUser.uid}').set(user.toJson());
-  //   update();
-  // }
+  void _createUserFirestore(UserModel user, User _firebaseUser) {
+    _firestore.doc('/users/${_firebaseUser.uid}').set(user.toJSON());
+    update();
+  }
 
   Future<void> signUp(
       String email, String password, String name, BuildContext context) async {
@@ -86,6 +89,10 @@ class AuthController extends GetxController {
           .then((result) {
         if (name.isEmpty) {
           Get.snackbar('Lôi đăng kí tài khoản', 'Thiếu username!');
+        } else if (name.isNotEmpty) {
+          UserModel user = UserModel(
+              name: name, uid: result.user!.uid, favorites: ["id_holder"]);
+          _createUserFirestore(user, result.user!);
         }
       });
     } on FirebaseAuthException catch (e) {

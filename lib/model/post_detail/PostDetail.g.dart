@@ -36,7 +36,7 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     requiredSkills: (json['requiredSkills'] as List<dynamic>?)
         ?.map((e) => RequiredSkillsBean.fromJson(e as Map<String, dynamic>))
         .toList(),
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     jobTitle: json['jobTitle'] as String?,
     aliasPost: json['aliasPost'] as String?,
     jobType: json['jobType'] as String?,
@@ -53,7 +53,8 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     jobRequirement: json['jobRequirement'] as String?,
     contactPersonName: json['contactPersonName'] as String?,
     contactEmail: json['contactEmail'] as String?,
-    expiredTime: json['expiredTime'] as String?,
+    expiredTime: json['expiredTime'] as num?,
+    publishedDate: json['publishedDate'] as num?,
     countView: json['countView'] as num?,
     v: json['v'] as num?,
   );
@@ -78,6 +79,7 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
       'contactPersonName': instance.contactPersonName,
       'contactEmail': instance.contactEmail,
       'expiredTime': instance.expiredTime,
+      'publishedDate': instance.publishedDate,
       'countView': instance.countView,
       'v': instance.v,
     };
@@ -85,17 +87,17 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
 LocationBean _$LocationBeanFromJson(Map<String, dynamic> json) {
   return LocationBean(
     type: json['type'] as String?,
-    id: json['id'] as String?,
     coordinates:
         (json['coordinates'] as List<dynamic>?)?.map((e) => e as num).toList(),
+    id: json['_id'] as String?,
   );
 }
 
 Map<String, dynamic> _$LocationBeanToJson(LocationBean instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'id': instance.id,
       'coordinates': instance.coordinates,
+      'id': instance.id,
     };
 
 Company_IdBean _$Company_IdBeanFromJson(Map<String, dynamic> json) {
@@ -108,7 +110,7 @@ Company_IdBean _$Company_IdBeanFromJson(Map<String, dynamic> json) {
     hasLocations: (json['hasLocations'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     companyName: json['companyName'] as String?,
     companyNameEn: json['companyNameEn'] as String?,
     companySlug: json['companySlug'] as String?,
@@ -153,7 +155,7 @@ OptionalDetailCompany_IdBean _$OptionalDetailCompany_IdBeanFromJson(
     companyPics: (json['companyPics'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     logoUrl: json['logoUrl'] as String?,
     bannerUrl: json['bannerUrl'] as String?,
     companyAddress: json['companyAddress'] as String?,
@@ -181,7 +183,7 @@ Map<String, dynamic> _$OptionalDetailCompany_IdBeanToJson(
 
 CompanySize_IdBean _$CompanySize_IdBeanFromJson(Map<String, dynamic> json) {
   return CompanySize_IdBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     companySize: json['companySize'] as String?,
     v: json['v'] as num?,
   );
@@ -196,7 +198,7 @@ Map<String, dynamic> _$CompanySize_IdBeanToJson(CompanySize_IdBean instance) =>
 
 RequiredSkillsBean _$RequiredSkillsBeanFromJson(Map<String, dynamic> json) {
   return RequiredSkillsBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     scrapeId: json['scrapeId'] as num?,
     skillName: json['skillName'] as String?,
     createdAt: json['createdAt'] as String?,
@@ -217,7 +219,7 @@ Map<String, dynamic> _$RequiredSkillsBeanToJson(RequiredSkillsBean instance) =>
 
 HasJobsBean _$HasJobsBeanFromJson(Map<String, dynamic> json) {
   return HasJobsBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     jobCategory_Id: json['jobCategory_Id'] as String?,
     JobDetailName: json['JobDetailName'] as String?,
     JobDetailNameEn: json['JobDetailNameEn'] as String?,
@@ -244,7 +246,7 @@ Map<String, dynamic> _$HasJobsBeanToJson(HasJobsBean instance) =>
 
 HasLocationsBean _$HasLocationsBeanFromJson(Map<String, dynamic> json) {
   return HasLocationsBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     provinceName: json['provinceName'] as String?,
     fakeId: json['fakeId'] as num?,
     v: json['v'] as num?,
@@ -279,7 +281,7 @@ Map<String, dynamic> _$LanguageRequiredBeanToJson(
 
 ProficiencyBean _$ProficiencyBeanFromJson(Map<String, dynamic> json) {
   return ProficiencyBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     proficiencyLevelName: json['proficiencyLevelName'] as String?,
     proficiencyLevelNameEn: json['proficiencyLevelNameEn'] as String?,
     scrapeId: json['scrapeId'] as num?,
@@ -304,7 +306,7 @@ Map<String, dynamic> _$ProficiencyBeanToJson(ProficiencyBean instance) =>
 
 LanguageBean _$LanguageBeanFromJson(Map<String, dynamic> json) {
   return LanguageBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     languageName: json['languageName'] as String?,
     languageNameEn: json['languageNameEn'] as String?,
     scrapeId: json['scrapeId'] as num?,

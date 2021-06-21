@@ -34,7 +34,8 @@ class DataBean {
   String? jobRequirement;
   String? contactPersonName;
   String? contactEmail;
-  String? expiredTime;
+  num? expiredTime;
+  num? publishedDate;
   num? countView;
   num? v;
 
@@ -57,6 +58,7 @@ class DataBean {
       this.contactPersonName,
       this.contactEmail,
       this.expiredTime,
+      this.publishedDate,
       this.countView,
       this.v});
 
@@ -69,10 +71,10 @@ class DataBean {
 @JsonSerializable()
 class LocationBean {
   String? type;
-  String? id;
   List<num>? coordinates;
+  String? id;
 
-  LocationBean({this.type, this.id, this.coordinates});
+  LocationBean({this.type, this.coordinates, this.id});
 
   factory LocationBean.fromJson(Map<String, dynamic> json) =>
       _$LocationBeanFromJson(json);

@@ -44,6 +44,22 @@ class _RecruitmentPostService implements RecruitmentPostService {
   }
 
   @override
+  Future<SimilarJobs> getSimilarJobs(map) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(map);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SimilarJobs>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/recruitment-post/similar-jobs',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SimilarJobs.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<TopViewPosts> getTopViewPosts(map) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

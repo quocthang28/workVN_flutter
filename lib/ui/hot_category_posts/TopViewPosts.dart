@@ -15,7 +15,8 @@ class TopViewPostsScreen extends StatefulWidget {
 class _TopViewPostsScreenState extends State<TopViewPostsScreen> {
   final RecruitmentPostController _recruitmentPostController = Get.find();
 
-  final String categoryID = Get.arguments;
+  final String categoryID = Get.arguments[0];
+  final String categoryName = Get.arguments[1];
 
   TopViewPosts _topViewPosts = TopViewPosts();
   bool isLoading = true;
@@ -37,9 +38,11 @@ class _TopViewPostsScreenState extends State<TopViewPostsScreen> {
     Widget _buildPosts() {
       return ListView.separated(
         itemCount: _topViewPosts.data!.length,
-        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) => Row(
           children: [
+            Image.network(_topViewPosts.data![index].company_Id!
+                    .optionalDetailCompany_Id!.logoUrl!)
+                .expand(flex: 1),
             ListTile(
               onTap: () => Get.toNamed(SiteNavigation.POSTDETAIL, arguments: [
                 _topViewPosts.data![index].id,
@@ -47,7 +50,7 @@ class _TopViewPostsScreenState extends State<TopViewPostsScreen> {
                         _topViewPosts.data![index].salaryRange_Id!.salaryMax ==
                             0
                     ? 'Thương lượng'
-                    : '${_topViewPosts.data![index].salaryRange_Id!.salaryMin}\$ - ${post.salaryRange_Id!.salaryMax}\$'
+                    : '${_topViewPosts.data![index].salaryRange_Id!.salaryMin}\$ - ${_topViewPosts.data![index].salaryRange_Id!.salaryMax}\$'
               ]),
               visualDensity: VisualDensity.comfortable,
               title: _topViewPosts.data![index].jobTitle!.text.ellipsis
@@ -58,12 +61,15 @@ class _TopViewPostsScreenState extends State<TopViewPostsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   //element.id!.text.make(),
-                  post.company_Id!.companyName!.text.ellipsis
+                  _topViewPosts
+                      .data![index].company_Id!.companyName!.text.ellipsis
                       .size(16)
                       .make()
                       .pOnly(bottom: 4),
-                  post.salaryRange_Id!.salaryMin == 0 &&
-                          post.salaryRange_Id!.salaryMax == 0
+                  _topViewPosts.data![index].salaryRange_Id!.salaryMin == 0 &&
+                          _topViewPosts
+                                  .data![index].salaryRange_Id!.salaryMax ==
+                              0
                       ? 'Thương lượng'
                           .text
                           .size(16)
@@ -86,8 +92,16 @@ class _TopViewPostsScreenState extends State<TopViewPostsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: categoryName.text.semiBold
+            .textStyle(TextStyle(
+                foreground: Paint()..shader = AppColor.linearGradient))
+            .make(),
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
       body: isLoading ? CircularProgressIndicator().centered() : _buildPosts(),
     );
+    //return Container();
   }
 }

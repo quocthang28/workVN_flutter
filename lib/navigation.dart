@@ -8,4 +8,5 @@ class SiteNavigation {
   static const HOME = '/home';
   static const POSTDETAIL = '/postdetail';
   static const TOPVIEWPOSTS = '/topviewposts';
+  static const COMPANYDETAIL = '/companydetail';
 }

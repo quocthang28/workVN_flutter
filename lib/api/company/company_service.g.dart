@@ -28,6 +28,21 @@ class _CompanyService implements CompanyService {
     return value;
   }
 
+  @override
+  Future<CompanyDetail> getCompanyDetail(companyID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'company_id': companyID};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CompanyDetail>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/company/detail',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CompanyDetail.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

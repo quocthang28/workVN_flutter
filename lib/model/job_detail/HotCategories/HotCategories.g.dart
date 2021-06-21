@@ -67,7 +67,7 @@ Map<String, dynamic> _$DetailBeanToJson(DetailBean instance) =>
 
 JobCategory_IdBean _$JobCategory_IdBeanFromJson(Map<String, dynamic> json) {
   return JobCategory_IdBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     jobCategoryName: json['jobCategoryName'] as String?,
     jobCategoryNameEn: json['jobCategoryNameEn'] as String?,
     scrapeId: json['scrapeId'] as num?,

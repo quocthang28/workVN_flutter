@@ -6,6 +6,7 @@ import 'package:workvn/controller/benefits_controller.dart';
 import 'package:workvn/controller/recruitment_post_controller/recruitment_post_controller.dart';
 import 'package:workvn/model/post_detail/PostDetail.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:workvn/navigation.dart';
 import 'package:workvn/res/app_color.dart';
 import 'package:workvn/res/gaps.dart';
 import 'package:workvn/ui/common_widgets/post_detail_column.dart';
@@ -41,7 +42,25 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [Icon(Icons.favorite_border_outlined)],
+        elevation: 0,
+        backgroundColor: Colors.white,
+        actions: [
+          TextButton(
+            onPressed: () => Get.offNamedUntil(
+                SiteNavigation.MAIN, (route) => route.isFirst),
+            child:
+                'Về trang chủ'.text.semiBold.color(AppColor.lightBlue).make(),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.white,
+        onPressed: () {},
+        label: 'Lưu'.text.color(AppColor.lightBlue).make(),
+        icon: Icon(
+          Icons.favorite_border_outlined,
+          color: AppColor.lightBlue,
+        ),
       ),
       body: _isLoading
           ? CircularProgressIndicator().centered()

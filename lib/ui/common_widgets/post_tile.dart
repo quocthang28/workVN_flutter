@@ -18,7 +18,7 @@ class PostTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.network(post!.company_Id!.optionalDetailCompany_Id!.logoUrl!)
+        Image.network(post.company_Id!.optionalDetailCompany_Id!.logoUrl!)
             .expand(flex: 1),
         ListTile(
           onTap: () => Get.toNamed(SiteNavigation.POSTDETAIL, arguments: [

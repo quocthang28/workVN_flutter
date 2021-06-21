@@ -15,11 +15,13 @@ import 'package:workvn/controller/recruitment_post_controller/recruitment_post_c
 import 'package:workvn/navigation.dart';
 import 'package:workvn/ui/auth/login.dart';
 import 'package:workvn/ui/auth/register.dart';
+import 'package:workvn/ui/company_detail/company_detail.dart';
 import 'package:workvn/ui/home/home.dart';
 import 'package:workvn/ui/hot_category_posts/TopViewPosts.dart';
 import 'package:workvn/ui/main_screen.dart';
 import 'package:workvn/ui/post_detail/post_detail_screen.dart';
 import 'package:workvn/ui/splash.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
+        fontFamily: GoogleFonts.inter().fontFamily,
+        scaffoldBackgroundColor: Colors.white,
       ),
       initialRoute: SiteNavigation.SPLASH,
       initialBinding: BindingsBuilder(() {
@@ -71,6 +75,9 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: SiteNavigation.TOPVIEWPOSTS,
             page: () => TopViewPostsScreen()),
+        GetPage(
+            name: SiteNavigation.COMPANYDETAIL,
+            page: () => CompanyDetailScreen()),
       ],
     );
   }

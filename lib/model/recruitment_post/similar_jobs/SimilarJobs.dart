@@ -1,18 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'RecommendedPost.g.dart';
+part 'SimilarJobs.g.dart';
 
 @JsonSerializable()
-class RecommendedPost {
+class SimilarJobs {
   num? total;
   List<DataBean>? data;
 
-  RecommendedPost({this.total, this.data});
+  SimilarJobs({this.total, this.data});
 
-  factory RecommendedPost.fromJson(Map<String, dynamic> json) =>
-      _$RecommendedPostFromJson(json);
+  factory SimilarJobs.fromJson(Map<String, dynamic> json) =>
+      _$SimilarJobsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RecommendedPostToJson(this);
+  Map<String, dynamic> toJson() => _$SimilarJobsToJson(this);
 }
 
 @JsonSerializable()
@@ -34,8 +34,7 @@ class DataBean {
   String? jobRequirement;
   String? contactPersonName;
   String? contactEmail;
-  num? expiredTime;
-  num? publishedDate;
+  int? expiredTime;
   num? countView;
   num? v;
 
@@ -58,7 +57,6 @@ class DataBean {
       this.contactPersonName,
       this.contactEmail,
       this.expiredTime,
-      this.publishedDate,
       this.countView,
       this.v});
 
@@ -71,10 +69,10 @@ class DataBean {
 @JsonSerializable()
 class LocationBean {
   String? type;
-  List<num>? coordinates;
   String? id;
+  List<num>? coordinates;
 
-  LocationBean({this.type, this.coordinates, this.id});
+  LocationBean({this.type, this.id, this.coordinates});
 
   factory LocationBean.fromJson(Map<String, dynamic> json) =>
       _$LocationBeanFromJson(json);
@@ -186,8 +184,8 @@ class HasLocationsBean {
 
 @JsonSerializable()
 class LanguageRequiredBean {
-  String? language;
-  String? proficiency;
+  LanguageBean? language;
+  ProficiencyBean? proficiency;
 
   LanguageRequiredBean({this.language, this.proficiency});
 
@@ -195,4 +193,56 @@ class LanguageRequiredBean {
       _$LanguageRequiredBeanFromJson(json);
 
   Map<String, dynamic> toJson() => _$LanguageRequiredBeanToJson(this);
+}
+
+@JsonSerializable()
+class ProficiencyBean {
+  String? id;
+  String? proficiencyLevelName;
+  String? proficiencyLevelNameEn;
+  num? scrapeId;
+  String? bgColor;
+  String? createdAt;
+  String? updatedAt;
+  num? v;
+
+  ProficiencyBean(
+      {this.id,
+      this.proficiencyLevelName,
+      this.proficiencyLevelNameEn,
+      this.scrapeId,
+      this.bgColor,
+      this.createdAt,
+      this.updatedAt,
+      this.v});
+
+  factory ProficiencyBean.fromJson(Map<String, dynamic> json) =>
+      _$ProficiencyBeanFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProficiencyBeanToJson(this);
+}
+
+@JsonSerializable()
+class LanguageBean {
+  String? id;
+  String? languageName;
+  String? languageNameEn;
+  num? scrapeId;
+  String? createdAt;
+  String? updatedAt;
+  num? v;
+
+  LanguageBean(
+      {this.id,
+      this.languageName,
+      this.languageNameEn,
+      this.scrapeId,
+      this.createdAt,
+      this.updatedAt,
+      this.v});
+
+  factory LanguageBean.fromJson(Map<String, dynamic> json) =>
+      _$LanguageBeanFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LanguageBeanToJson(this);
 }

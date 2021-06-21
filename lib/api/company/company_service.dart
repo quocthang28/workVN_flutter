@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:workvn/model/company/company_detail/CompanyDetail.dart';
 import 'package:workvn/model/company/featured_company/FeaturedCompany.dart';
 
 part 'company_service.g.dart';
@@ -10,4 +11,7 @@ abstract class CompanyService {
 
   @GET("/company/featured-company")
   Future<FeaturedCompany> getFeaturedCompany();
+
+  @GET("/company/detail")
+  Future<CompanyDetail> getCompanyDetail(@Query("company_id") String companyID);
 }

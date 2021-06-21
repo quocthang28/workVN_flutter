@@ -26,7 +26,7 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
         : LanguageRequiredBean.fromJson(
             json['languageRequired'] as Map<String, dynamic>),
     hasLocations: (json['hasLocations'] as List<dynamic>?)
-        ?.map((e) => e as String)
+        ?.map((e) => HasLocationsBean.fromJson(e as Map<String, dynamic>))
         .toList(),
     hasJobs:
         (json['hasJobs'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -38,8 +38,13 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     aliasPost: json['aliasPost'] as String?,
     jobType: json['jobType'] as String?,
     jobLevel_Id: json['jobLevel_Id'] as String?,
-    company_Id: json['company_Id'] as String?,
-    salaryRange_Id: json['salaryRange_Id'] as String?,
+    company_Id: json['company_Id'] == null
+        ? null
+        : Company_IdBean.fromJson(json['company_Id'] as Map<String, dynamic>),
+    salaryRange_Id: json['salaryRange_Id'] == null
+        ? null
+        : SalaryRange_IdBean.fromJson(
+            json['salaryRange_Id'] as Map<String, dynamic>),
     isRequiredCoverLetter: json['isRequiredCoverLetter'] as bool?,
     location: json['location'] == null
         ? null
@@ -48,7 +53,7 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     jobRequirement: json['jobRequirement'] as String?,
     contactPersonName: json['contactPersonName'] as String?,
     contactEmail: json['contactEmail'] as String?,
-    expiredTime: json['expiredTime'] as String?,
+    expiredTime: json['expiredTime'] as num?,
     countView: json['countView'] as num?,
     v: json['v'] as num?,
   );
@@ -80,7 +85,7 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
 LocationBean _$LocationBeanFromJson(Map<String, dynamic> json) {
   return LocationBean(
     type: json['type'] as String?,
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     coordinates:
         (json['coordinates'] as List<dynamic>?)?.map((e) => e as num).toList(),
   );
@@ -91,6 +96,120 @@ Map<String, dynamic> _$LocationBeanToJson(LocationBean instance) =>
       'type': instance.type,
       'id': instance.id,
       'coordinates': instance.coordinates,
+    };
+
+SalaryRange_IdBean _$SalaryRange_IdBeanFromJson(Map<String, dynamic> json) {
+  return SalaryRange_IdBean(
+    id: json['_id'] as String?,
+    salaryMin: json['salaryMin'] as num?,
+    salaryMax: json['salaryMax'] as num?,
+    isShowUp: json['isShowUp'] as bool?,
+    v: json['v'] as num?,
+  );
+}
+
+Map<String, dynamic> _$SalaryRange_IdBeanToJson(SalaryRange_IdBean instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'salaryMin': instance.salaryMin,
+      'salaryMax': instance.salaryMax,
+      'isShowUp': instance.isShowUp,
+      'v': instance.v,
+    };
+
+Company_IdBean _$Company_IdBeanFromJson(Map<String, dynamic> json) {
+  return Company_IdBean(
+    hasBenefits: (json['hasBenefits'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    hasJobs:
+        (json['hasJobs'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    hasLocations: (json['hasLocations'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    id: json['_id'] as String?,
+    companyName: json['companyName'] as String?,
+    companyNameEn: json['companyNameEn'] as String?,
+    companySlug: json['companySlug'] as String?,
+    employer_Id: json['employer_Id'] as String?,
+    optionalDetailCompany_Id: json['optionalDetailCompany_Id'] == null
+        ? null
+        : OptionalDetailCompany_IdBean.fromJson(
+            json['optionalDetailCompany_Id'] as Map<String, dynamic>),
+    exactAddress: json['exactAddress'] as String?,
+    phoneNumber: json['phoneNumber'] as String?,
+    viewCount: json['viewCount'] as num?,
+    followerCount: json['followerCount'] as num?,
+    createdAt: json['createdAt'] as String?,
+    updatedAt: json['updatedAt'] as String?,
+    v: json['v'] as num?,
+  );
+}
+
+Map<String, dynamic> _$Company_IdBeanToJson(Company_IdBean instance) =>
+    <String, dynamic>{
+      'hasBenefits': instance.hasBenefits,
+      'hasJobs': instance.hasJobs,
+      'hasLocations': instance.hasLocations,
+      'id': instance.id,
+      'companyName': instance.companyName,
+      'companyNameEn': instance.companyNameEn,
+      'companySlug': instance.companySlug,
+      'employer_Id': instance.employer_Id,
+      'optionalDetailCompany_Id': instance.optionalDetailCompany_Id,
+      'exactAddress': instance.exactAddress,
+      'phoneNumber': instance.phoneNumber,
+      'viewCount': instance.viewCount,
+      'followerCount': instance.followerCount,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'v': instance.v,
+    };
+
+OptionalDetailCompany_IdBean _$OptionalDetailCompany_IdBeanFromJson(
+    Map<String, dynamic> json) {
+  return OptionalDetailCompany_IdBean(
+    companyPics: (json['companyPics'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    id: json['_id'] as String?,
+    logoUrl: json['logoUrl'] as String?,
+    bannerUrl: json['bannerUrl'] as String?,
+    companyAddress: json['companyAddress'] as String?,
+    contactName: json['contactName'] as String?,
+    companySize_Id: json['companySize_Id'] as String?,
+    v: json['v'] as num?,
+  );
+}
+
+Map<String, dynamic> _$OptionalDetailCompany_IdBeanToJson(
+        OptionalDetailCompany_IdBean instance) =>
+    <String, dynamic>{
+      'companyPics': instance.companyPics,
+      'id': instance.id,
+      'logoUrl': instance.logoUrl,
+      'bannerUrl': instance.bannerUrl,
+      'companyAddress': instance.companyAddress,
+      'contactName': instance.contactName,
+      'companySize_Id': instance.companySize_Id,
+      'v': instance.v,
+    };
+
+HasLocationsBean _$HasLocationsBeanFromJson(Map<String, dynamic> json) {
+  return HasLocationsBean(
+    id: json['_id'] as String?,
+    provinceName: json['provinceName'] as String?,
+    fakeId: json['fakeId'] as num?,
+    v: json['v'] as num?,
+  );
+}
+
+Map<String, dynamic> _$HasLocationsBeanToJson(HasLocationsBean instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'provinceName': instance.provinceName,
+      'fakeId': instance.fakeId,
+      'v': instance.v,
     };
 
 LanguageRequiredBean _$LanguageRequiredBeanFromJson(Map<String, dynamic> json) {

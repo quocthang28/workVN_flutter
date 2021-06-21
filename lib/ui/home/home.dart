@@ -75,8 +75,12 @@ class _HomeScreenState extends State<HomeScreen>
       List<Widget> categoryCards = [];
       _hotCategories.data!.forEach((element) {
         categoryCards.add(GestureDetector(
-          onTap: () => Get.toNamed(SiteNavigation.TOPVIEWPOSTS,
-              arguments: element.detail!.id),
+          behavior: HitTestBehavior.opaque,
+          onTap: () => Get.toNamed(SiteNavigation.TOPVIEWPOSTS, arguments: [
+            element.detail!.id,
+            element.detail!.jobCategory_Id!.jobCategoryName!
+          ]),
+          // onTap: () => print(element.detail!.id),
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,17 +141,21 @@ class _HomeScreenState extends State<HomeScreen>
         items: _featuredCompany.data!.map((e) {
           return Builder(
             builder: (BuildContext context) {
-              return CachedNetworkImage(
-                height: 180,
-                imageUrl:
-                    'https://images02.vietnamworks.com${e.optionalDetailCompany_Id!.logoUrl!}',
-                placeholder: (context, url) => Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: CircularProgressIndicator().centered()),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                fit: BoxFit.fitWidth,
+              return GestureDetector(
+                onTap: () =>
+                    Get.toNamed(SiteNavigation.COMPANYDETAIL, arguments: e.id),
+                child: CachedNetworkImage(
+                  height: 200,
+                  imageUrl:
+                      'https://images02.vietnamworks.com${e.optionalDetailCompany_Id!.logoUrl!}',
+                  placeholder: (context, url) => Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: CircularProgressIndicator().centered()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  fit: BoxFit.fitWidth,
+                ).pSymmetric(h: 40),
               );
             },
           );
@@ -157,14 +165,23 @@ class _HomeScreenState extends State<HomeScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: 'workVN'.text.color(Colors.white).make(),
+        centerTitle: true,
+        elevation: 0,
+        title: 'jobSeek'
+            .text
+            .extraBold
+            .textStyle(TextStyle(
+                foreground: Paint()..shader = AppColor.linearGradient))
+            .make(),
         //todo: add search here
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
               onPressed: () => _authController.signOut(),
               icon: Icon(
-                Icons.logout,
-                color: Colors.white,
+                Icons.search,
+                size: 30,
+                color: Colors.black,
               ))
         ],
       ),

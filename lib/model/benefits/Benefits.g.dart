@@ -22,7 +22,7 @@ Map<String, dynamic> _$BenefitsToJson(Benefits instance) => <String, dynamic>{
 
 DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
   return DataBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     benefitName: json['benefitName'] as String?,
     benefitNameEn: json['benefitNameEn'] as String?,
     scrapeId: json['scrapeId'] as num?,

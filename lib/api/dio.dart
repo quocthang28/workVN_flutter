@@ -14,7 +14,7 @@ class DioModule {
     print('**** Dio created');
     BaseOptions options = new BaseOptions(
         //baseUrl: 'http://10.0.2.2:1337/',
-        baseUrl: 'http://192.168.1.106:1337' // ipv4 address
+        baseUrl: 'http://192.168.1.101:1337' // ipv4 address
         );
 
     _dio = Dio(options);

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:workvn/api/company/company_service.dart';
+import 'package:workvn/model/company/company_detail/CompanyDetail.dart';
 import 'package:workvn/model/company/featured_company/FeaturedCompany.dart';
 
 class CompanyController extends GetxController {
@@ -7,5 +8,9 @@ class CompanyController extends GetxController {
 
   Future<FeaturedCompany> getFeaturedCompany() {
     return companyService.getFeaturedCompany();
+  }
+
+  Future<CompanyDetail> getCompanyDetail(String id) {
+    return companyService.getCompanyDetail(id);
   }
 }

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'RecommendedPost.dart';
+part of 'SimilarJobs.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-RecommendedPost _$RecommendedPostFromJson(Map<String, dynamic> json) {
-  return RecommendedPost(
+SimilarJobs _$SimilarJobsFromJson(Map<String, dynamic> json) {
+  return SimilarJobs(
     total: json['total'] as num?,
     data: (json['data'] as List<dynamic>?)
         ?.map((e) => DataBean.fromJson(e as Map<String, dynamic>))
@@ -15,7 +15,7 @@ RecommendedPost _$RecommendedPostFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$RecommendedPostToJson(RecommendedPost instance) =>
+Map<String, dynamic> _$SimilarJobsToJson(SimilarJobs instance) =>
     <String, dynamic>{
       'total': instance.total,
       'data': instance.data,
@@ -55,8 +55,7 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     jobRequirement: json['jobRequirement'] as String?,
     contactPersonName: json['contactPersonName'] as String?,
     contactEmail: json['contactEmail'] as String?,
-    expiredTime: json['expiredTime'] as num?,
-    publishedDate: json['publishedDate'] as num?,
+    expiredTime: json['expiredTime'] as int?,
     countView: json['countView'] as num?,
     v: json['v'] as num?,
   );
@@ -81,7 +80,6 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
       'contactPersonName': instance.contactPersonName,
       'contactEmail': instance.contactEmail,
       'expiredTime': instance.expiredTime,
-      'publishedDate': instance.publishedDate,
       'countView': instance.countView,
       'v': instance.v,
     };
@@ -89,17 +87,17 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
 LocationBean _$LocationBeanFromJson(Map<String, dynamic> json) {
   return LocationBean(
     type: json['type'] as String?,
+    id: json['_id'] as String?,
     coordinates:
         (json['coordinates'] as List<dynamic>?)?.map((e) => e as num).toList(),
-    id: json['_id'] as String?,
   );
 }
 
 Map<String, dynamic> _$LocationBeanToJson(LocationBean instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'coordinates': instance.coordinates,
       'id': instance.id,
+      'coordinates': instance.coordinates,
     };
 
 SalaryRange_IdBean _$SalaryRange_IdBeanFromJson(Map<String, dynamic> json) {
@@ -218,8 +216,12 @@ Map<String, dynamic> _$HasLocationsBeanToJson(HasLocationsBean instance) =>
 
 LanguageRequiredBean _$LanguageRequiredBeanFromJson(Map<String, dynamic> json) {
   return LanguageRequiredBean(
-    language: json['language'] as String?,
-    proficiency: json['proficiency'] as String?,
+    language: json['language'] == null
+        ? null
+        : LanguageBean.fromJson(json['language'] as Map<String, dynamic>),
+    proficiency: json['proficiency'] == null
+        ? null
+        : ProficiencyBean.fromJson(json['proficiency'] as Map<String, dynamic>),
   );
 }
 
@@ -228,4 +230,52 @@ Map<String, dynamic> _$LanguageRequiredBeanToJson(
     <String, dynamic>{
       'language': instance.language,
       'proficiency': instance.proficiency,
+    };
+
+ProficiencyBean _$ProficiencyBeanFromJson(Map<String, dynamic> json) {
+  return ProficiencyBean(
+    id: json['_id'] as String?,
+    proficiencyLevelName: json['proficiencyLevelName'] as String?,
+    proficiencyLevelNameEn: json['proficiencyLevelNameEn'] as String?,
+    scrapeId: json['scrapeId'] as num?,
+    bgColor: json['bgColor'] as String?,
+    createdAt: json['createdAt'] as String?,
+    updatedAt: json['updatedAt'] as String?,
+    v: json['v'] as num?,
+  );
+}
+
+Map<String, dynamic> _$ProficiencyBeanToJson(ProficiencyBean instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'proficiencyLevelName': instance.proficiencyLevelName,
+      'proficiencyLevelNameEn': instance.proficiencyLevelNameEn,
+      'scrapeId': instance.scrapeId,
+      'bgColor': instance.bgColor,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'v': instance.v,
+    };
+
+LanguageBean _$LanguageBeanFromJson(Map<String, dynamic> json) {
+  return LanguageBean(
+    id: json['_id'] as String?,
+    languageName: json['languageName'] as String?,
+    languageNameEn: json['languageNameEn'] as String?,
+    scrapeId: json['scrapeId'] as num?,
+    createdAt: json['createdAt'] as String?,
+    updatedAt: json['updatedAt'] as String?,
+    v: json['v'] as num?,
+  );
+}
+
+Map<String, dynamic> _$LanguageBeanToJson(LanguageBean instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'languageName': instance.languageName,
+      'languageNameEn': instance.languageNameEn,
+      'scrapeId': instance.scrapeId,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'v': instance.v,
     };

@@ -32,7 +32,7 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     hasLocations: (json['hasLocations'] as List<dynamic>?)
         ?.map((e) => HasLocationsBean.fromJson(e as Map<String, dynamic>))
         .toList(),
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     companyName: json['companyName'] as String?,
     companyNameEn: json['companyNameEn'] as String?,
     companySlug: json['companySlug'] as String?,
@@ -74,7 +74,7 @@ OptionalDetailCompany_IdBean _$OptionalDetailCompany_IdBeanFromJson(
     Map<String, dynamic> json) {
   return OptionalDetailCompany_IdBean(
     companyPics: json['companyPics'],
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     logoUrl: json['logoUrl'] as String?,
     bannerUrl: json['bannerUrl'] as String?,
     companyAddress: json['companyAddress'] as String?,
@@ -102,7 +102,7 @@ Map<String, dynamic> _$OptionalDetailCompany_IdBeanToJson(
 
 CompanySize_IdBean _$CompanySize_IdBeanFromJson(Map<String, dynamic> json) {
   return CompanySize_IdBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     companySize: json['companySize'] as String?,
     v: json['v'] as num?,
   );
@@ -117,7 +117,7 @@ Map<String, dynamic> _$CompanySize_IdBeanToJson(CompanySize_IdBean instance) =>
 
 HasLocationsBean _$HasLocationsBeanFromJson(Map<String, dynamic> json) {
   return HasLocationsBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     provinceName: json['provinceName'] as String?,
     fakeId: json['fakeId'] as num?,
     v: json['v'] as num?,
@@ -134,7 +134,7 @@ Map<String, dynamic> _$HasLocationsBeanToJson(HasLocationsBean instance) =>
 
 HasJobsBean _$HasJobsBeanFromJson(Map<String, dynamic> json) {
   return HasJobsBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     jobCategory_Id: json['jobCategory_Id'] as String?,
     JobDetailName: json['JobDetailName'] as String?,
     JobDetailNameEn: json['JobDetailNameEn'] as String?,
@@ -161,7 +161,7 @@ Map<String, dynamic> _$HasJobsBeanToJson(HasJobsBean instance) =>
 
 HasBenefitsBean _$HasBenefitsBeanFromJson(Map<String, dynamic> json) {
   return HasBenefitsBean(
-    id: json['id'] as String?,
+    id: json['_id'] as String?,
     benefitName: json['benefitName'] as String?,
     benefitNameEn: json['benefitNameEn'] as String?,
     description: json['description'] as String?,
