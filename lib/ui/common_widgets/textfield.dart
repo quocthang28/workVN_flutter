@@ -19,7 +19,6 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      //todo: add validator
       keyboardType: inputType,
       style: TextStyle(fontSize: 20.0),
       controller: controller,

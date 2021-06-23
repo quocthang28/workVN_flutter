@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:workvn/model/nearby_post/NearbyPost.dart';
 import 'package:workvn/model/post_detail/PostDetail.dart';
 import 'package:workvn/model/recruitment_post/recommended_post/RecommendedPost.dart';
 import 'package:workvn/model/recruitment_post/similar_jobs/SimilarJobs.dart';
@@ -22,4 +23,11 @@ abstract class RecruitmentPostService {
 
   @POST("/recruitment-post/relevant-jobs")
   Future<TopViewPosts> getTopViewPosts(@Body() Map<String, dynamic> map);
+
+  @POST("/recruitment-post/nearby")
+  Future<NearbyPost> getNearbyPost(
+      @Query("lng") String lng,
+      @Query("lat") String lat,
+      @Query("text_search") String textSearch,
+      @Body() Map<String, dynamic> map);
 }
