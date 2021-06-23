@@ -1,45 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_detail_service.dart';
+part of 'salary_range_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _JobDetailService implements JobDetailService {
-  _JobDetailService(this._dio, {this.baseUrl});
+class _SalaryRangeService implements SalaryRangeService {
+  _SalaryRangeService(this._dio, {this.baseUrl});
 
   final Dio _dio;
 
   String? baseUrl;
 
   @override
-  Future<HotCategories> getHotCategories() async {
+  Future<SalaryRange> getSalaryRange() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HotCategories>(
+        _setStreamType<SalaryRange>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/job-detail/hot-category/job-post',
+                .compose(_dio.options, '/salary-range/all',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = HotCategories.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<AllCategories> getAllCategories() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AllCategories>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/job-detail/all',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AllCategories.fromJson(_result.data!);
+    final value = SalaryRange.fromJson(_result.data!);
     return value;
   }
 

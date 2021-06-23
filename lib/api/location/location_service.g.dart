@@ -1,45 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_detail_service.dart';
+part of 'location_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _JobDetailService implements JobDetailService {
-  _JobDetailService(this._dio, {this.baseUrl});
+class _LocationService implements LocationService {
+  _LocationService(this._dio, {this.baseUrl}) {
+    baseUrl ??= 'https://api.openweathermap.org';
+  }
 
   final Dio _dio;
 
   String? baseUrl;
 
   @override
-  Future<HotCategories> getHotCategories() async {
+  Future<LocationModel> getLocation(lat, lon, apiKey, metric) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'lat': lat,
+      r'lon': lon,
+      r'appid': apiKey,
+      r'units': metric
+    };
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HotCategories>(
+        _setStreamType<LocationModel>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/job-detail/hot-category/job-post',
+                .compose(_dio.options, '/data/2.5/weather',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = HotCategories.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<AllCategories> getAllCategories() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AllCategories>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/job-detail/all',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AllCategories.fromJson(_result.data!);
+    final value = LocationModel.fromJson(_result.data!);
     return value;
   }
 

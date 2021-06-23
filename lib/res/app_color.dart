@@ -10,6 +10,7 @@ class AppColor {
   static const Color authGreen = Color(0xffd2eff7);
   static const Color green = Color(0xFF69c271);
   static const Color dividerColor = Color(0xffeceaea);
+  static const Color textFieldColor = Color(0xfff4f1f1);
   //todo: add button color
 
   static Shader linearGradient = LinearGradient(

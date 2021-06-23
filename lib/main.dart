@@ -4,15 +4,21 @@ import 'package:get/get.dart';
 import 'package:workvn/api/benefits/benefits_service.dart';
 import 'package:workvn/api/company/company_service.dart';
 import 'package:workvn/api/dio.dart';
+import 'package:workvn/api/firebase/firebase_service.dart';
 import 'package:workvn/api/job_detail/job_detail_service.dart';
+import 'package:workvn/api/location/location_service.dart';
 import 'package:workvn/api/recruitment_post/recruitment_post_service.dart';
+import 'package:workvn/api/salary_range/salary_range_service.dart';
 import 'package:workvn/controller/app_controller.dart';
 import 'package:workvn/controller/auth_controller.dart';
 import 'package:workvn/controller/benefits_controller.dart';
 import 'package:workvn/controller/company_controller/company_controller.dart';
 import 'package:workvn/controller/job_detail_controller/job_detail_controller.dart';
+import 'package:workvn/controller/location_controller.dart';
 import 'package:workvn/controller/recruitment_post_controller/recruitment_post_controller.dart';
+import 'package:workvn/controller/salary_range_controller.dart';
 import 'package:workvn/navigation.dart';
+import 'package:workvn/ui/all_categories/all_categories.dart';
 import 'package:workvn/ui/auth/login.dart';
 import 'package:workvn/ui/auth/register.dart';
 import 'package:workvn/ui/company_detail/company_detail.dart';
@@ -43,17 +49,27 @@ class MyApp extends StatelessWidget {
       initialRoute: SiteNavigation.SPLASH,
       initialBinding: BindingsBuilder(() {
         Get.lazyPut<DioModule>(() => DioModule(), fenix: true);
+        Get.put<LocationService>(
+            LocationService(Get.find<DioModule>().dio, baseUrl: kBaseUrl),
+            permanent: true);
+        Get.put<LocationController>(LocationController(), permanent: true);
+        Get.lazyPut<RecruitmentPostService>(
+            () => RecruitmentPostService(Get.find<DioModule>().dio),
+            fenix: true);
         Get.put<AppController>(AppController(), permanent: true);
         Get.put<AuthController>(AuthController(), permanent: true);
         Get.put<BenefitsService>(BenefitsService(Get.find<DioModule>().dio),
             permanent: true);
+        Get.put<SalaryRangeService>(
+            SalaryRangeService(Get.find<DioModule>().dio),
+            permanent: true);
         Get.put<BenefitsController>(BenefitsController(), permanent: true);
+        Get.put<SalaryRangeController>(SalaryRangeController(),
+            permanent: true);
         Get.lazyPut<JobDetailService>(
             () => JobDetailService(Get.find<DioModule>().dio),
             fenix: true);
-        Get.lazyPut<RecruitmentPostService>(
-            () => RecruitmentPostService(Get.find<DioModule>().dio),
-            fenix: true);
+
         Get.lazyPut<CompanyService>(
             () => CompanyService(Get.find<DioModule>().dio),
             fenix: true);
@@ -78,6 +94,9 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: SiteNavigation.COMPANYDETAIL,
             page: () => CompanyDetailScreen()),
+        GetPage(
+            name: SiteNavigation.ALLCATEGORIES,
+            page: () => AllCategoriesScreen()),
       ],
     );
   }

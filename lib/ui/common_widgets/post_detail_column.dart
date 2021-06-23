@@ -10,6 +10,7 @@ import 'package:workvn/model/recruitment_post/similar_jobs/SimilarJobs.dart';
 import 'package:workvn/navigation.dart';
 import 'package:workvn/res/app_color.dart';
 import 'package:workvn/res/gaps.dart';
+import 'package:workvn/ui/common_widgets/gradient_border.dart';
 import 'package:workvn/ui/common_widgets/show_more.dart';
 import 'package:intl/intl.dart';
 
@@ -65,17 +66,18 @@ class _PostDetailColumnState extends State<PostDetailColumn> {
   @override
   Widget build(BuildContext context) {
     Widget _buildBenefit() {
-      List<String> benefitNames = [];
+      Set<String> benefitNames = Set();
       Random ran = Random();
-      for (int i = 0; i < 5; i++) {
+      int amount = 3 + ran.nextInt(6 - 3);
+      while (benefitNames.length < amount) {
         benefitNames.add(
             _benefitsController.benefits.data![ran.nextInt(30)].benefitName!);
       }
       return Wrap(
         children: benefitNames
-            .map((e) => VxBox(
-                  child: e.text.size(18).color(AppColor.lightBlue).make().p(8),
-                ).color(AppColor.lightBlue.withOpacity(0.1)).make().p(8))
+            .map((e) => GradientContainer(
+                    e.text.size(16).color(AppColor.lightBlue).make().p(6))
+                .p(8))
             .toList(),
       );
     }
@@ -208,15 +210,21 @@ class _PostDetailColumnState extends State<PostDetailColumn> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              VxBox(
-                child: widget.salary.text
-                    .size(18)
-                    .color(AppColor.lightBlue)
-                    .make()
-                    .p(8),
-              )
-                  .color(AppColor.lightBlue.withOpacity(0.1))
-                  .make()
+              // VxBox(
+              //   child: widget.salary.text
+              //       .size(18)
+              //       .color(AppColor.lightBlue)
+              //       .make()
+              //       .p(8),
+              // )
+              //     .color(AppColor.lightBlue.withOpacity(0.1))
+              //     .make()
+              //     .pOnly(left: 8),
+              GradientContainer(widget.salary.text
+                      .size(18)
+                      .color(AppColor.lightBlue)
+                      .make()
+                      .p(8))
                   .pOnly(left: 8),
               VxBox(
                       child: 'Toàn thời gian'

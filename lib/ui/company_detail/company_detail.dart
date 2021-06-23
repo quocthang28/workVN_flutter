@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:get/get.dart';
@@ -36,9 +37,21 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
           : SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  _companyID.text.make(),
-                  _companyDetail.data!.optionalDetailCompany_Id!.logoUrl!.text
-                      .make(),
+                  _companyDetail.data!.id!.text.make(),
+                  // CachedNetworkImage(
+                  //   height: 200,
+                  //   imageUrl:
+                  //       'https://images02.vietnamworks.com${_companyDetail.data!.optionalDetailCompany_Id!.logoUrl!}',
+                  //   placeholder: (context, url) => Container(
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //       ),
+                  //       child: CircularProgressIndicator().centered()),
+                  //   errorWidget: (context, url, error) => Icon(Icons.error),
+                  //   fit: BoxFit.fitWidth,
+                  // )
+                  // _companyDetail.data!.optionalDetailCompany_Id!.logoUrl!.text
+                  //     .make(),
                 ],
               ),
             ),

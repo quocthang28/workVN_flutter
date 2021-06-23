@@ -8,7 +8,7 @@ import 'package:workvn/res/app_color.dart';
 class PostTile extends StatelessWidget {
   PostTile({required this.post});
 
-  DataBean post;
+  final DataBean post;
 
   static PostTile buildInstance(dynamic post) {
     return PostTile(post: post);

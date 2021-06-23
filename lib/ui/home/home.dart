@@ -200,15 +200,25 @@ class _HomeScreenState extends State<HomeScreen>
             !_isLoadingFeaturedCompany
                 ? _buildFeaturedCompanies()
                 : SizedBox(height: 180),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: 'Danh mục hot'
-                  .text
-                  .size(20.0)
-                  .bold
-                  .color(Colors.grey[700]!)
-                  .make(),
-            ).p(8.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                'Danh mục hot'
+                    .text
+                    .size(20.0)
+                    .bold
+                    .color(Colors.grey[700]!)
+                    .make(),
+                GestureDetector(
+                  onTap: () => Get.toNamed(SiteNavigation.ALLCATEGORIES),
+                  child: 'Xem tất cả'
+                      .text
+                      .size(18)
+                      .color(AppColor.lightBlue)
+                      .make(),
+                )
+              ],
+            ).p(8),
             !_isLoadingCategories
                 ? _buildHotCategories()
                 : SizedBox(

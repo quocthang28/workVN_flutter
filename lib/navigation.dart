@@ -9,4 +9,5 @@ class SiteNavigation {
   static const POSTDETAIL = '/postdetail';
   static const TOPVIEWPOSTS = '/topviewposts';
   static const COMPANYDETAIL = '/companydetail';
+  static const ALLCATEGORIES = '/allcategories';
 }
