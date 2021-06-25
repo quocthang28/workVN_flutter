@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:workvn/controller/auth_controller.dart';
 import 'package:workvn/navigation.dart';
@@ -93,11 +94,14 @@ class RegisterScreen extends StatelessWidget {
                           Get.snackbar('Lỗi đăng kí tài khoản',
                               'Tên hiển thị không được để trống!');
                         } else {
-                          await _authController.signUp(
-                              _emailController.text,
-                              _pwController.text,
-                              _userNameController.text,
-                              context);
+                          await _authController
+                              .signUp(_emailController.text, _pwController.text,
+                                  _userNameController.text, context)
+                              .then((value) async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('firstTime', false);
+                          });
                         }
                       },
                     )

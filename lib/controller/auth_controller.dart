@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workvn/model/User/User.dart';
 import 'package:workvn/navigation.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,11 @@ class AuthController extends GetxController {
   //   });
   // }
 
+  Future<bool> checkFirstTimeLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('firstTime') ?? true;
+  }
+
   void handleAuthChanged(User? _firebaseUser) async {
     if (_firebaseUser?.uid != null) {
       // logged in
@@ -68,9 +74,12 @@ class AuthController extends GetxController {
     }
 
     if (_firebaseUser == null) {
-      Get.offAllNamed(SiteNavigation.LOGIN);
+      if (await checkFirstTimeLaunch()) {
+        Get.offAllNamed(SiteNavigation.ONBOARDING);
+      } else
+        Get.offAllNamed(SiteNavigation.LOGIN);
     } else {
-      Get.offAllNamed(SiteNavigation.ONBOARDING);
+      Get.offAllNamed(SiteNavigation.MAIN);
       //Get.offAllNamed(SiteNavigation.HOME);
     }
   }

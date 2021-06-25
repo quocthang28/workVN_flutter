@@ -12,17 +12,17 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List<Map<String, String>> listOfScreen = [
     {
-      "image": "images/Lost.svg",
+      "image": "assets/Lost.svg",
       "text": "lorem ipsum 1",
       "title": "lorem ipsum 1 "
     },
     {
-      "image": "images/Hello.svg",
+      "image": "assets/Hello.svg",
       "text": "lorem ipsum 2",
       "title": "lorem ipsum 2"
     },
     {
-      "image": "images/Search.svg",
+      "image": "assets/Search.svg",
       "text": "lorem ipsum 3",
       "title": "lorem ipsum 3"
     },

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:workvn/navigation.dart';
 import 'package:workvn/res/gaps.dart';
 
 class Pages extends StatelessWidget {
@@ -49,9 +51,12 @@ class Pages extends StatelessWidget {
                   width: 200,
                   child: TextButton(
                     child: Center(
-                      child: "Bắt đầu".text.center.white.make(),
+                      child:
+                          "Bắt đầu".text.size(16).semiBold.center.white.make(),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offAllNamed(SiteNavigation.REGISTER);
+                    },
                   ),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(

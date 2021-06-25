@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:workvn/controller/auth_controller.dart';
 import 'package:workvn/navigation.dart';
@@ -83,8 +84,14 @@ class LoginScreen extends StatelessWidget {
                         child:
                             'Đăng nhập'.text.color(AppColor.lightBlue).make(),
                         onPressed: () async {
-                          await _authController.login(_emailController.text,
-                              _pwController.text, context);
+                          await _authController
+                              .login(_emailController.text, _pwController.text,
+                                  context)
+                              .then((value) async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('firstTime', false);
+                          });
                         })
                   ],
                 ).p(4.0),
