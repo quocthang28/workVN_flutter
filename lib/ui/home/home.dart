@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-          ).p(8),
+          ).pSymmetric(h: 8, v: 2),
         ));
       });
 
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        title: 'jobSeek'
+        title: 'jobSeeker'
             .text
             .extraBold
             .textStyle(TextStyle(
@@ -175,19 +175,37 @@ class _HomeScreenState extends State<HomeScreen>
             .make(),
         //todo: add search here
         backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-              onPressed: () => _authController.signOut(),
-              icon: Icon(
-                Icons.search,
-                size: 30,
-                color: Colors.black,
-              ))
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            TextField(
+              onSubmitted: (value) {
+                Get.toNamed(SiteNavigation.HOMESEARCH, arguments: value);
+              },
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: AppColor.lightBlue,
+                ),
+                isDense: true,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                hintText: 'Nhập từ khóa',
+                border: InputBorder.none,
+                filled: true,
+                fillColor: AppColor.textFieldColor,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ).pSymmetric(h: 8, v: 4),
             Align(
               alignment: Alignment.centerLeft,
               child: 'Nhà tuyển dụng hàng đầu'
@@ -223,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ? _buildHotCategories()
                 : SizedBox(
                     width: double.infinity,
-                    height: 100,
+                    height: 150,
                     child: Shimmer.fromColors(
                       baseColor: Colors.grey[300]!,
                       highlightColor: Colors.white,
@@ -232,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen>
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Container(
                             width: double.infinity,
-                            height: 30.0,
+                            height: 20.0,
                             color: Colors.white,
                           ),
                         ).pSymmetric(h: 8, v: 10),

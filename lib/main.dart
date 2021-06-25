@@ -6,6 +6,7 @@ import 'package:workvn/api/company/company_service.dart';
 import 'package:workvn/api/dio.dart';
 import 'package:workvn/api/firebase/firebase_service.dart';
 import 'package:workvn/api/job_detail/job_detail_service.dart';
+import 'package:workvn/api/job_type_service/job_type_service.dart';
 import 'package:workvn/api/location/location_service.dart';
 import 'package:workvn/api/recruitment_post/recruitment_post_service.dart';
 import 'package:workvn/api/salary_range/salary_range_service.dart';
@@ -14,6 +15,7 @@ import 'package:workvn/controller/auth_controller.dart';
 import 'package:workvn/controller/benefits_controller.dart';
 import 'package:workvn/controller/company_controller/company_controller.dart';
 import 'package:workvn/controller/job_detail_controller/job_detail_controller.dart';
+import 'package:workvn/controller/job_type_controller.dart';
 import 'package:workvn/controller/location_controller.dart';
 import 'package:workvn/controller/recruitment_post_controller/recruitment_post_controller.dart';
 import 'package:workvn/controller/salary_range_controller.dart';
@@ -23,8 +25,10 @@ import 'package:workvn/ui/auth/login.dart';
 import 'package:workvn/ui/auth/register.dart';
 import 'package:workvn/ui/company_detail/company_detail.dart';
 import 'package:workvn/ui/home/home.dart';
+import 'package:workvn/ui/home/home_search.dart';
 import 'package:workvn/ui/hot_category_posts/TopViewPosts.dart';
 import 'package:workvn/ui/main_screen.dart';
+import 'package:workvn/ui/onboarding/OnBoardingScreen.dart';
 import 'package:workvn/ui/post_detail/post_detail_screen.dart';
 import 'package:workvn/ui/splash.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,6 +64,9 @@ class MyApp extends StatelessWidget {
         Get.put<AuthController>(AuthController(), permanent: true);
         Get.put<BenefitsService>(BenefitsService(Get.find<DioModule>().dio),
             permanent: true);
+        Get.put<JobTypeService>(JobTypeService(Get.find<DioModule>().dio),
+            permanent: true);
+        Get.put<JobTypeController>(JobTypeController(), permanent: true);
         Get.put<SalaryRangeService>(
             SalaryRangeService(Get.find<DioModule>().dio),
             permanent: true);
@@ -69,7 +76,6 @@ class MyApp extends StatelessWidget {
         Get.lazyPut<JobDetailService>(
             () => JobDetailService(Get.find<DioModule>().dio),
             fenix: true);
-
         Get.lazyPut<CompanyService>(
             () => CompanyService(Get.find<DioModule>().dio),
             fenix: true);
@@ -97,6 +103,10 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: SiteNavigation.ALLCATEGORIES,
             page: () => AllCategoriesScreen()),
+        GetPage(
+            name: SiteNavigation.HOMESEARCH, page: () => HomeSearchScreen()),
+        GetPage(
+            name: SiteNavigation.ONBOARDING, page: () => OnBoardingScreen()),
       ],
     );
   }

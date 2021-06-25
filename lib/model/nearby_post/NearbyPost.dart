@@ -124,7 +124,7 @@ class Company_IdBean {
   String? companyNameEn;
   String? companySlug;
   String? employer_Id;
-  String? optionalDetailCompany_Id;
+  OptionalDetailCompany_IdBean? optionalDetailCompany_Id;
   String? exactAddress;
   String? phoneNumber;
   num? viewCount;
@@ -155,6 +155,33 @@ class Company_IdBean {
       _$Company_IdBeanFromJson(json);
 
   Map<String, dynamic> toJson() => _$Company_IdBeanToJson(this);
+}
+
+@JsonSerializable()
+class OptionalDetailCompany_IdBean {
+  String? id;
+  List<String>? companyPics;
+  String? logoUrl;
+  String? bannerUrl;
+  String? companyAddress;
+  String? contactName;
+  String? companySize_Id;
+  num? v;
+
+  OptionalDetailCompany_IdBean(
+      {this.id,
+      this.companyPics,
+      this.logoUrl,
+      this.bannerUrl,
+      this.companyAddress,
+      this.contactName,
+      this.companySize_Id,
+      this.v});
+
+  factory OptionalDetailCompany_IdBean.fromJson(Map<String, dynamic> json) =>
+      _$OptionalDetailCompany_IdBeanFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OptionalDetailCompany_IdBeanToJson(this);
 }
 
 @JsonSerializable()

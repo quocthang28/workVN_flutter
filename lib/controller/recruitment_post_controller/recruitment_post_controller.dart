@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:workvn/api/recruitment_post/recruitment_post_service.dart';
+import 'package:workvn/model/home_search/HomeSearchPost.dart';
 import 'package:workvn/model/nearby_post/NearbyPost.dart';
 import 'package:workvn/model/post_detail/PostDetail.dart';
 import 'package:workvn/model/recruitment_post/recommended_post/RecommendedPost.dart';
@@ -28,5 +29,10 @@ class RecruitmentPostController extends GetxController {
   Future<NearbyPost> getNearbyPosts(
       String lng, String lat, String text, Map<String, dynamic> map) {
     return recruitmentPostService.getNearbyPost(lng, lat, text, map);
+  }
+
+  Future<HomeSearchPost> getHomeSearchPosts(
+      String text, Map<String, dynamic> map) {
+    return recruitmentPostService.getHomeSearchPost(text, map);
   }
 }

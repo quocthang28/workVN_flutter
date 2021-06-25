@@ -71,7 +71,7 @@ class _PostDetailColumnState extends State<PostDetailColumn> {
       int amount = 3 + ran.nextInt(6 - 3);
       while (benefitNames.length < amount) {
         benefitNames.add(
-            _benefitsController.benefits.data![ran.nextInt(30)].benefitName!);
+            _benefitsController.benefits.data![ran.nextInt(15)].benefitName!);
       }
       return Wrap(
         children: benefitNames
@@ -91,9 +91,17 @@ class _PostDetailColumnState extends State<PostDetailColumn> {
               itemCount: _similarJobs.data!.length,
               itemBuilder: (context, index) => Row(
                 children: [
-                  Image.network(_similarJobs.data![index].company_Id!
-                          .optionalDetailCompany_Id!.logoUrl!)
-                      .expand(flex: 1),
+                  Image.network(
+                    _similarJobs.data![index].company_Id!
+                        .optionalDetailCompany_Id!.logoUrl!,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return Icon(
+                        Icons.error,
+                        color: Colors.grey,
+                      );
+                    },
+                  ).expand(flex: 1),
                   ListTile(
                     onTap: () => Get.toNamed(SiteNavigation.POSTDETAIL,
                         arguments: [
@@ -240,8 +248,20 @@ class _PostDetailColumnState extends State<PostDetailColumn> {
           ListTile(
             onTap: () => Get.toNamed(SiteNavigation.COMPANYDETAIL,
                 arguments: widget.postDetail.data!.company_Id!.id),
-            leading: Image.network(widget.postDetail.data!.company_Id!
-                .optionalDetailCompany_Id!.logoUrl!),
+            leading: Image.network(
+              widget.postDetail.data!.company_Id!.optionalDetailCompany_Id!
+                  .logoUrl!,
+              errorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return SizedBox(
+                  width: 100,
+                  child: Icon(
+                    Icons.error,
+                    color: Colors.grey,
+                  ),
+                );
+              },
+            ),
             title: widget.postDetail.data!.company_Id!.companyName!.text
                 .size(16)
                 .make(),

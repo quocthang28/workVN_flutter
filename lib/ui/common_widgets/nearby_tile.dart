@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:workvn/model/nearby_post/NearbyPost.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:workvn/model/recruitment_post/recommended_post/RecommendedPost.dart';
+import 'package:get/get.dart';
 import 'package:workvn/navigation.dart';
 import 'package:workvn/res/app_color.dart';
 
-class PostTile extends StatelessWidget {
-  PostTile({required this.post});
+class NearbyTile extends StatelessWidget {
+  NearbyTile({required this.post});
 
   final DataBean post;
 
-  static PostTile buildInstance(dynamic post) {
-    return PostTile(post: post);
+  static NearbyTile buildInstance(DataBean post) {
+    return NearbyTile(post: post);
+  }
+
+  String getSalary() {
+    if (post.salaryRange_Id!.salaryMin! == 0 &&
+        post.salaryRange_Id!.salaryMax! == 0) {
+      return 'Thương lượng';
+    } else
+      return '${post.salaryRange_Id!.salaryMin!}\$ - ${post.salaryRange_Id!.salaryMax!}';
   }
 
   @override
@@ -22,46 +30,43 @@ class PostTile extends StatelessWidget {
           post.company_Id!.optionalDetailCompany_Id!.logoUrl!,
           errorBuilder:
               (BuildContext context, Object exception, StackTrace? stackTrace) {
-            return Icon(
-              Icons.error,
-              color: Colors.grey,
+            return SizedBox(
+              width: 100,
+              child: Icon(
+                Icons.error,
+                color: Colors.grey,
+              ),
             );
           },
         ).expand(flex: 1),
         ListTile(
-          onTap: () => Get.toNamed(SiteNavigation.POSTDETAIL, arguments: [
-            post.id,
-            post.salaryRange_Id!.salaryMin == 0 &&
-                    post.salaryRange_Id!.salaryMax == 0
-                ? 'Thương lượng'
-                : '${post.salaryRange_Id!.salaryMin}\$ - ${post.salaryRange_Id!.salaryMax}\$'
-          ]),
+          onTap: () => Get.toNamed(SiteNavigation.POSTDETAIL,
+              arguments: [post.id, getSalary()]),
           visualDensity: VisualDensity.comfortable,
           title: post.jobTitle!.text.ellipsis.size(18).make(),
           subtitle: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              //element.id!.text.make(),
               post.company_Id!.companyName!.text.ellipsis
                   .size(16)
                   .make()
                   .pOnly(bottom: 4),
-              post.salaryRange_Id!.salaryMin == 0 &&
-                      post.salaryRange_Id!.salaryMax == 0
-                  ? 'Thương lượng'
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  getSalary().text.color(AppColor.lightBlue).make(),
+                  '${post.distance!.toStringAsFixed(2)} km'
                       .text
-                      .size(16)
-                      .color(AppColor.lightBlue)
-                      .make()
-                  : '${post.salaryRange_Id!.salaryMin}\$ - ${post.salaryRange_Id!.salaryMax}\$'
-                      .text
+                      .size(14)
                       .color(AppColor.lightBlue)
                       .make(),
+                ],
+              ),
             ],
           ).pOnly(top: 4),
         ).expand(flex: 3),
       ],
-    ).p(8);
+    ).pSymmetric(h: 8);
   }
 }

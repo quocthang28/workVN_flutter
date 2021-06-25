@@ -10,4 +10,6 @@ class SiteNavigation {
   static const TOPVIEWPOSTS = '/topviewposts';
   static const COMPANYDETAIL = '/companydetail';
   static const ALLCATEGORIES = '/allcategories';
+  static const HOMESEARCH = '/homesearch';
+  static const ONBOARDING = '/onboarding';
 }
