@@ -55,16 +55,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         backgroundColor: Colors.white,
       ),
       body: Obx(
-        () => ListView.separated(
-          itemCount: savedPosts.length,
-          itemBuilder: (context, index) => SavedPostTile.buildInstance(
-              savedPosts[index].data!,
-              getSalaryRange(savedPosts[index].data!.salaryRange_Id!)),
-          separatorBuilder: (context, index) => Divider(
-            thickness: 1.0,
-            color: Colors.grey[300],
-          ).pSymmetric(h: 16),
-        ),
+        () => savedPosts.length == 0
+            ? 'Bạn chưa lưu việc làm nào.'.text.make().centered()
+            : ListView.separated(
+                itemCount: savedPosts.length,
+                itemBuilder: (context, index) => SavedPostTile.buildInstance(
+                    savedPosts[index].data!,
+                    getSalaryRange(savedPosts[index].data!.salaryRange_Id!)),
+                separatorBuilder: (context, index) => Divider(
+                  thickness: 1.0,
+                  color: Colors.grey[300],
+                ).pSymmetric(h: 16),
+              ),
       ),
     );
   }

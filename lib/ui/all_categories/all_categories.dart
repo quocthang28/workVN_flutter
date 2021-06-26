@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:get/get.dart';
 import 'package:workvn/controller/job_detail_controller/job_detail_controller.dart';
-import 'package:workvn/model/job_detail/all_categories/AllCategories.dart';
 import 'package:workvn/navigation.dart';
 import 'package:workvn/res/app_color.dart';
 
@@ -11,7 +10,6 @@ class AllCategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.separated(itemBuilder: itemBuilder, separatorBuilder: separatorBuilder, itemCount: itemCount);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -32,7 +30,6 @@ class AllCategoriesScreen extends StatelessWidget {
                     _jobDetailController
                         .allCategories.data![index].JobDetailName
                   ]),
-                  // onTap: () => print(element.detail!.id),
                   child: Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,6 +54,6 @@ class AllCategoriesScreen extends StatelessWidget {
                   thickness: 1.0,
                   color: Colors.grey[300],
                 ).pSymmetric(h: 16),
-            itemCount: 70));
+            itemCount: _jobDetailController.allCategories.data!.length));
   }
 }

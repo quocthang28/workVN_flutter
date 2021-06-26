@@ -22,6 +22,8 @@ class Pages extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           50.heightBox,
           SvgPicture.asset(
@@ -32,16 +34,17 @@ class Pages extends StatelessWidget {
           25.heightBox,
           25.heightBox,
           title.text
-              .size(30)
+              .size(22)
               .color(Color(0xff4568dc))
-              .fontFamily("Inter")
+              .align(TextAlign.center)
               .bold
-              .make(),
+              .make()
+              .pSymmetric(h: 4),
           20.heightBox,
           text.text
-              .size(14)
+              .size(16)
               .color(Color(0xff4568dc))
-              .fontFamily("Inter")
+              .align(TextAlign.center)
               .bold
               .make(),
           35.heightBox,

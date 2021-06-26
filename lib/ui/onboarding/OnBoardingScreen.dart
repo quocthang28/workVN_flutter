@@ -12,19 +12,21 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List<Map<String, String>> listOfScreen = [
     {
-      "image": "assets/Lost.svg",
-      "text": "lorem ipsum 1",
-      "title": "lorem ipsum 1 "
+      "image": "assets/Hello.svg",
+      "text": "Tìm việc một cách nhanh chóng và tiện lợi",
+      "title": "Chào mừng bạn đến với jobSeeker"
     },
     {
-      "image": "assets/Hello.svg",
-      "text": "lorem ipsum 2",
-      "title": "lorem ipsum 2"
+      "image": "assets/Lost.svg",
+      "text":
+          "Chúng tôi cung cấp thông tin tuyển dụng chi tiết và chất lượng, phù hợp với tiêu chí mà bạn chọn",
+      "title": "Tìm công việc phù hợp với bạn"
     },
     {
       "image": "assets/Search.svg",
-      "text": "lorem ipsum 3",
-      "title": "lorem ipsum 3"
+      "text":
+          "Chúng tôi cập nhật thông tin tuyển dụng mới trong thời gian sớm nhất",
+      "title": "Cập nhật thông tin nhanh chóng"
     },
   ];
 

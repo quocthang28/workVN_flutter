@@ -26,19 +26,19 @@ class HomeSearchTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // Image.network(
-        //   post.company_Id!.optionalDetailCompany_Id!.logoUrl!,
-        //   errorBuilder:
-        //       (BuildContext context, Object exception, StackTrace? stackTrace) {
-        //     return SizedBox(
-        //       width: 100,
-        //       child: Icon(
-        //         Icons.error,
-        //         color: Colors.grey,
-        //       ),
-        //     );
-        //   },
-        // ).expand(flex: 1),
+        Image.network(
+          post.company_Id!.optionalDetailCompany_Id!.logoUrl!,
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace? stackTrace) {
+            return SizedBox(
+              width: 100,
+              child: Icon(
+                Icons.error,
+                color: Colors.grey,
+              ),
+            );
+          },
+        ).expand(flex: 1),
         ListTile(
           onTap: () => Get.toNamed(SiteNavigation.POSTDETAIL,
               arguments: [post.id, getSalary()]),
@@ -48,10 +48,10 @@ class HomeSearchTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // post.company_Id!.companyName!.text.ellipsis
-              //     .size(16)
-              //     .make()
-              //     .pOnly(bottom: 4),
+              post.company_Id!.companyName!.text.ellipsis
+                  .size(16)
+                  .make()
+                  .pOnly(bottom: 4),
               getSalary().text.color(AppColor.lightBlue).make(),
             ],
           ).pOnly(top: 4),

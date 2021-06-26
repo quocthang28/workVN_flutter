@@ -19,7 +19,7 @@ class NearbyTile extends StatelessWidget {
         post.salaryRange_Id!.salaryMax! == 0) {
       return 'Thương lượng';
     } else
-      return '${post.salaryRange_Id!.salaryMin!}\$ - ${post.salaryRange_Id!.salaryMax!}';
+      return '${post.salaryRange_Id!.salaryMin!}\$ - ${post.salaryRange_Id!.salaryMax!}\$';
   }
 
   @override

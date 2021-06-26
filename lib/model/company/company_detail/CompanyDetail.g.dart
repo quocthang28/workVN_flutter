@@ -42,7 +42,6 @@ DataBean _$DataBeanFromJson(Map<String, dynamic> json) {
     phoneNumber: json['phoneNumber'] as String?,
     viewCount: json['viewCount'] as num?,
     followerCount: json['followerCount'] as num?,
-    scrapeId: json['scrapeId'] as num?,
     createdAt: json['createdAt'] as String?,
     updatedAt: json['updatedAt'] as String?,
     v: json['v'] as num?,
@@ -63,7 +62,6 @@ Map<String, dynamic> _$DataBeanToJson(DataBean instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'viewCount': instance.viewCount,
       'followerCount': instance.followerCount,
-      'scrapeId': instance.scrapeId,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'v': instance.v,
@@ -80,7 +78,7 @@ OptionalDetailCompany_IdBean _$OptionalDetailCompany_IdBeanFromJson(
     bannerUrl: json['bannerUrl'] as String?,
     companyAddress: json['companyAddress'] as String?,
     contactName: json['contactName'] as String?,
-    companySize_Id: json['companySize_Id'],
+    companySize_Id: json['companySize_Id'] as String?,
     v: json['v'] as num?,
   );
 }

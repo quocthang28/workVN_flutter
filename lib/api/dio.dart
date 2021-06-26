@@ -13,10 +13,11 @@ class DioModule {
 
     print('**** Dio created');
     BaseOptions options = new BaseOptions(
-        //baseUrl: 'http://10.0.2.2:1337/',
-        baseUrl: 'http://192.168.1.101:1337' // local address
-        //baseUrl: 'https://testingservices321.azurewebsites.net' //cloud
-         );
+      //baseUrl: 'http://10.0.2.2:1337/',
+      //baseUrl: 'http://192.168.1.101:1337' // local address
+      //baseUrl: 'https://testingservices321.azurewebsites.net' //cloud
+      baseUrl: 'https://workrecruitment.azurewebsites.net',
+    );
 
     _dio = Dio(options);
 

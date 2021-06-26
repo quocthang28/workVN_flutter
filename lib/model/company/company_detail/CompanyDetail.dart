@@ -29,7 +29,6 @@ class DataBean {
   String? phoneNumber;
   num? viewCount;
   num? followerCount;
-  num? scrapeId;
   String? createdAt;
   String? updatedAt;
   num? v;
@@ -48,7 +47,6 @@ class DataBean {
       this.phoneNumber,
       this.viewCount,
       this.followerCount,
-      this.scrapeId,
       this.createdAt,
       this.updatedAt,
       this.v});
@@ -67,7 +65,7 @@ class OptionalDetailCompany_IdBean {
   String? bannerUrl;
   String? companyAddress;
   String? contactName;
-  dynamic? companySize_Id;
+  String? companySize_Id;
   num? v;
 
   OptionalDetailCompany_IdBean(
